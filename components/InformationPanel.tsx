@@ -15,6 +15,15 @@ type Props = {
 }
 
 function InformationPanel({city, lat, long, results}: Props) {
+
+    const sunrise = new Date(results.daily.sunrise[0]);
+    sunrise.setHours(sunrise.getHours() - 3);
+
+    const sunset = new Date(results.daily.sunset[0]);
+    sunset.setHours(sunset.getHours() - 3);
+
+
+
   return (
     <div className="bg-gradient-to-br from-[#394F68] to-[#183B7E] text-white p-10">
         <div className="pb-5">
@@ -80,14 +89,13 @@ function InformationPanel({city, lat, long, results}: Props) {
         
 
         <div className="flex-1 flex justify-between items-center">
-            <p className="font-extralight">Nascer do sol</p>
+            <p className="font-extralight">Nascer do sol (horário de Brasilia)</p>
             <p className="uppercase text-2xl">
-                {new Date(results.daily.sunrise[0]).toLocaleTimeString
-                ("pt-GB", {
-                    hour: "numeric",
-                    minute: "numeric",
-                    hour12: true,
-                })}
+            {sunrise.toLocaleTimeString("pt-GB", {
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true,
+            })}
             </p>
             </div>
             </div>
@@ -98,14 +106,13 @@ function InformationPanel({city, lat, long, results}: Props) {
         
 
         <div className="flex-1 flex justify-between items-center">
-            <p className="font-extralight">Pôr do sol</p>
+            <p className="font-extralight">Pôr do sol (horário de Brasilia)</p>
             <p className="uppercase text-2xl">
-                {new Date(results.daily.sunset[0]).toLocaleTimeString
-                ("pt-GB", {
-                    hour: "numeric",
-                    minute: "numeric",
-                    hour12: true,
-                })}
+            {sunset.toLocaleTimeString("pt-GB", {
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true,
+            })}
             </p>
             </div>
             </div> 
